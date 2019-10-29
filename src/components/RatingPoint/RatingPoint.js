@@ -1,11 +1,11 @@
 import React from 'react';
 
-import classes from './Star.module.css';
+import classes from './RatingPoint.module.css';
 
-const Star = (props) => (
+const RatingPoint = (props) => (
         <span className={classes.star} {...props}>
             {props.checked}
         </span>
 )
 
-export default Star;
+export default RatingPoint;

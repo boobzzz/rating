@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import Star from './components/Star/Star';
+import RatingPoint from './components/RatingPoint/RatingPoint';
 
 let length = 10;
 let rating = [];
@@ -17,6 +17,9 @@ export default class Rating extends Component {
         this.setState({
             rated: event.target.id
         })
+        event.target.checked === '★' ?
+        event.target.checked = '☆' :
+        event.target.checked = '★'
     }
 
     render() {
@@ -24,7 +27,7 @@ export default class Rating extends Component {
 
         return (
             rating.map((val, i) =>
-                <Star
+                <RatingPoint
                     key={i}
                     id={i + 1}
                     checked={i < rated ? '★' : '☆'}
