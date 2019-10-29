@@ -14,12 +14,11 @@ export default class Rating extends Component {
     }
 
     setRating = (event) => {
+        let t = event.target
+
         this.setState({
-            rated: event.target.id
+            rated: t.checked === '★' ? t.id - 1 : t.id
         })
-        event.target.checked === '★' ?
-        event.target.checked = '☆' :
-        event.target.checked = '★'
     }
 
     render() {
