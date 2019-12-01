@@ -1,37 +1,41 @@
 import React, { Component } from 'react';
+import range from '@bit/ramda.ramda.range';
 
 import RatingPoint from './components/RatingPoint/RatingPoint';
 
-let length = 10;
-let rating = [];
-for (let i = 0; i < length; i++) {
-    rating.push('')
-}
+let length = range(1, 10);
 
 export default class Rating extends Component {
     state = {
-        rated: 0,
+        rate: 3,
     }
 
     setRating = (event) => {
         let t = event.target
 
-        this.setState({
-            rated: t.checked === '★' ? t.id - 1 : t.id
+        this.setState(({ rate }) => {
+            return {
+                rate: t.innerHTML === '\u2606' || (t.innerHTML === '\u2605' && t.id < rate )
+                    ? t.id
+                    : t.id - 1
+            }
         })
+        console.dir(t);
     }
 
     render() {
-        let { rated } = this.state;
+        let { rate } = this.state;
 
         return (
-            rating.map((val, i) =>
-                <RatingPoint
-                    key={i}
-                    id={i + 1}
-                    checked={i < rated ? '★' : '☆'}
-                    onClick={this.setRating} />
-            )
+            <div>
+                {length.map(item =>
+                    <RatingPoint
+                        key={item}
+                        id={item}
+                        symbol={item <= rate ? '\u2605' : '\u2606'}
+                        clicked={this.setRating} />
+                )}
+            </div>
         )
     }
 }
